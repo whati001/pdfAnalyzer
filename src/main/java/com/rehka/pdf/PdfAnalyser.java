@@ -16,6 +16,7 @@ public class PdfAnalyser {
     private static final float priceInGray = 0.15f;
 
     private static int totalFileCount = 0;
+    private static int totalFailed = 0;
     private static int totalPageCount = 0;
     private static int totalPageInColor = 0;
     private static int totalPageInGray = 0;
@@ -24,7 +25,7 @@ public class PdfAnalyser {
 
     private static File getDefaultDir() {
         File home = new File(System.getProperty("user.home"));
-        File defHome = new File(home, "PDF");
+        File defHome = new File(home, "Desktop/PDF");
         if (defHome.exists()) {
             return defHome;
         }
@@ -66,16 +67,18 @@ public class PdfAnalyser {
                 totalPageCount += f.getPageCount();
                 totalPageInColor += f.getPageInColor();
                 totalPageInGray += f.getPageInGray();
-                totalPrice += f.getPageInColor() * priceInColor + f.getPageInGray() + priceInGray;
+                totalPrice += f.getPageInColor() * priceInColor + f.getPageInGray() * priceInGray;
                 if (totalDims.containsKey(f.getDimension().getKey())) {
                     totalDims.put(f.getDimension().getKey(), totalDims.get(f.getDimension().getKey()) + 1);
                 } else {
                     totalDims.put(f.getDimension().getKey(), 1);
                 }
+            } else {
+                totalFailed++;
             }
         }
 
-        System.out.println("#############################################m###################################");
+        System.out.println("################################################################################");
         ArrayList<String> result = new ArrayList<>();
         result.add(String.format("Total files to print: %d", totalFileCount));
         result.add(String.format("Total pages to print: %d", totalPageCount));
@@ -83,6 +86,10 @@ public class PdfAnalyser {
         result.add(String.format("Total pages in gray to print: %d", totalPageInGray));
         result.add(String.format("Total dimensions to print: %s", totalDims));
         result.add(String.format("Total price for print job: %.2f", totalPrice));
+        if (totalFailed > 0) {
+            result.add(String.format("################################################################################"));
+            result.add(String.format("Total count of failed analyzed files: %d", totalFailed));
+        }
 
         System.out.println(String.join("\n", result));
         JOptionPane.showMessageDialog(null, String.join("\n", result));
