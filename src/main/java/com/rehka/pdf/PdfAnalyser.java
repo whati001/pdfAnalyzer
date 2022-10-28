@@ -12,8 +12,8 @@ import static java.util.stream.Collectors.toList;
 
 public class PdfAnalyser {
 
-    private static final float priceInColor = 0.28f;
-    private static final float priceInGray = 0.15f;
+    private static final float priceInColor = 0.29f;
+    private static final float priceInGray = 0.16f;
 
     private static int totalFileCount = 0;
     private static int totalFailed = 0;
