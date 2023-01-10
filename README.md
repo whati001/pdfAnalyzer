@@ -30,6 +30,7 @@ mvn test
 ## Know-Issues
 * hardcoded price value
 * very poor user-interface
+* some bugs which we have not found yet
   
 ## Authors
 * [whati001](https://github.com/whati001)
