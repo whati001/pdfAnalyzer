@@ -56,12 +56,16 @@ public class PdfAnalyser {
         }));
     }
 
+    private static void customizeAppUi() {
+        UIManager.put("FileChooser.saveButtonText","Berechnen");
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 16));
+    }
+    
     public static void main(String[] args) {
         System.out.println("PdfAnalyzer started, please select a folder containing the PDF files");
         
-        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 18));
-        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 16));
-
+        customizeAppUi();
         List<PdfFile> res = Arrays.stream(listDirectory(".*\\.pdf$")).parallel()
                 .map(PdfFile::new)
                 .map(PdfFile::analyze).collect(toList());
