@@ -10,6 +10,8 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
+import java.awt.Font;
+
 public class PdfAnalyser {
 
     private static final float priceInColor = 0.29f;
@@ -56,6 +58,10 @@ public class PdfAnalyser {
 
     public static void main(String[] args) {
         System.out.println("PdfAnalyzer started, please select a folder containing the PDF files");
+        
+        UIManager.put("OptionPane.messageFont", new Font("Arial", Font.BOLD, 18));
+        UIManager.put("OptionPane.buttonFont", new Font("Arial", Font.PLAIN, 16));
+
         List<PdfFile> res = Arrays.stream(listDirectory(".*\\.pdf$")).parallel()
                 .map(PdfFile::new)
                 .map(PdfFile::analyze).collect(toList());
