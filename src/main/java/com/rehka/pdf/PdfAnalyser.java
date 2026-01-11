@@ -15,7 +15,7 @@ import java.awt.Font;
 public class PdfAnalyser {
 
     private static final float priceInColor = 0.29f;
-    private static final float priceInGray = 0.17f;
+    private static final float priceInGray = 0.18f;
 
     private static int totalFileCount = 0;
     private static int totalFailed = 0;
